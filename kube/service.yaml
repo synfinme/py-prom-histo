@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: py-prom-histo-svc
+spec:
+  ports:
+    - protocol: TCP
+      port: 9100
+      targetPort: 9100
+  selector:
+    app: py-prom-histo
