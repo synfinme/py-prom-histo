@@ -5,15 +5,18 @@ import random
 import sys
 import time
 
+import dataset
 
-h = Histogram('py_prometheus_histo', 'Description of tko_histogram')
+h = Histogram('py_prometheus_histo', 'Description of py_prometheus_histo')
 
 def update_stats(x):
     # Populates 'h' metric with a bunch of values
-    for i in range(500):
-        r = 2.0 * random.random() - 1.0
-        y = 4.0 * (r * r * r + 1.0)
-        h.observe(y)
+    #for i in range(500):
+    #    r = 2.0 * random.random() - 1.0
+    #    y = 4.0 * (r * r * r + 1.0)
+    #    h.observe(y)
+    for v in dataset.data:
+        h.observe(v)
 
     # Other cosmetic stuff
     sys.stdout.write('.')
