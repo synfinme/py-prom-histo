@@ -20,5 +20,5 @@ spec:
       - name: py-prom-histo
         command:
         - /opt/scripts/py-prom-histo.py
-        image: synfinmelab/py-prom-histo:v0.3
+        image: synfinmelab/py-prom-histo:v0.4
         imagePullPolicy: IfNotPresent
