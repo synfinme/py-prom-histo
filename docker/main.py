@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from prometheus_client import start_http_server, Histogram
+import os
 import random
 import sys
 import time
@@ -11,7 +12,15 @@ except ImportError:
     from default_dataset import data
 
 
-h = Histogram('py_prometheus_histo', 'Description of py_prometheus_histo')
+METRIC_NAME_BASE = 'py_prometheus_histo'
+METRIC_NAME_SUFFIX = os.environ.get('METRIC_NAME_SUFFIX', '')
+
+metric_name = METRIC_NAME_BASE
+if len(METRIC_NAME_SUFFIX) > 0:
+    metric_name += '_' + METRIC_NAME_SUFFIX
+
+
+h = Histogram(metric_name, 'Description of %s' % (metric_name))
 
 
 def update_stats():
