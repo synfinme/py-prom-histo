@@ -1,7 +1,7 @@
 
 REPO_NAME := synfinmelab
 IMAGE_NAME := py-prom-histo
-IMAGE_TAG := v0.5
+IMAGE_TAG := v0.6
 IMAGE := "${REPO_NAME}/${IMAGE_NAME}:${IMAGE_TAG}"
 
 _init	:

@@ -14,6 +14,7 @@ except ImportError:
 
 METRIC_NAME_BASE = 'py_prometheus_histo'
 METRIC_NAME_SUFFIX = os.environ.get('METRIC_NAME_SUFFIX', '')
+DELAY_SECONDS      = os.environ.get('DELAY_SECONDS', '0.1')
 
 metric_name = METRIC_NAME_BASE
 if len(METRIC_NAME_SUFFIX) > 0:
@@ -27,6 +28,7 @@ def update_stats():
     # Populates 'h' metric with a bunch of values from imported dataset
     for v in data:
         h.observe(v)
+        time.sleep(float(DELAY_SECONDS))
 
 
 def main():
@@ -42,8 +44,6 @@ def main():
         if (x % 60) == 59:
             sys.stdout.write('\n')
             sys.stdout.flush()
-
-        time.sleep(60)
 
 
 if __name__ == '__main__':
