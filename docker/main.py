@@ -23,13 +23,14 @@ if len(METRIC_NAME_SUFFIX) > 0:
 
 
 #h = Histogram(metric_name, 'Description of %s' % (metric_name))
-s = Summary(metric_name, 'Description of %s' % (metric_name))
+s = Summary(metric_name, 'Description of %s' % (metric_name), ['endpoint'])
 
 
 def update_stats():
     # Populates 'h' metric with a bunch of values from imported dataset
     for v in data:
-        s.observe(v)
+        s.labels(endpoint='/v1/set_id').observe(v)
+        s.labels(endpoint='/v1/get_id').observe((v / 3.0))
         time.sleep(float(DELAY_SECONDS))
 
 
