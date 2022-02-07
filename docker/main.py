@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
-from prometheus_client import start_http_server, Histogram
+#from prometheus_client import start_http_server, Histogram
+from prometheus_client import start_http_server, Summary
 import os
 import random
 import sys
@@ -12,22 +13,23 @@ except ImportError:
     from default_dataset import data
 
 
-METRIC_NAME_BASE = 'py_prometheus_histo'
+METRIC_NAME_BASE = 'py_prometheus_summary'
 METRIC_NAME_SUFFIX = os.environ.get('METRIC_NAME_SUFFIX', '')
-DELAY_SECONDS      = os.environ.get('DELAY_SECONDS', '0.1')
+DELAY_SECONDS      = os.environ.get('DELAY_SECONDS', '15.0')
 
 metric_name = METRIC_NAME_BASE
 if len(METRIC_NAME_SUFFIX) > 0:
     metric_name += '_' + METRIC_NAME_SUFFIX
 
 
-h = Histogram(metric_name, 'Description of %s' % (metric_name))
+#h = Histogram(metric_name, 'Description of %s' % (metric_name))
+s = Summary(metric_name, 'Description of %s' % (metric_name))
 
 
 def update_stats():
     # Populates 'h' metric with a bunch of values from imported dataset
     for v in data:
-        h.observe(v)
+        s.observe(v)
         time.sleep(float(DELAY_SECONDS))
 
 

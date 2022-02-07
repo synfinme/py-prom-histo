@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: py-prom-histo
-        image: synfinmelab/py-prom-histo:v0.6
+        image: synfinmelab/py-prom-histo:v0.6.1
         imagePullPolicy: IfNotPresent
         command:
         - /opt/scripts/py-prom-histo.py
@@ -26,4 +26,4 @@ spec:
         - name: METRIC_NAME_SUFFIX
           value: ''
         - name: DELAY_SECONDS
-          value: '0.1'
+          value: '15.0'
